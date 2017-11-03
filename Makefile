@@ -5,7 +5,7 @@ include ./static/tools/mk/lint.mk
 
 GOBIN = build/bin
 GO ?= latest
-networkid ?= 
+networkid ?=
 
 # This is a code for automatic help generator.
 # It supports ANSI colors and categories.
@@ -59,6 +59,13 @@ statusgo-ios-simulator: xgo	##@cross-compile Build status-go for iOS Simulator
 xgo:
 	build/env.sh docker pull farazdagi/xgo
 	build/env.sh go get github.com/karalabe/xgo
+
+gomobile-install:
+	go get -u golang.org/x/mobile/cmd/gomobile
+
+statusgo-gomobile:
+	gomobile init
+	gomobile bind --target ios --tags ios -v -o ./build/bin/Statusgo.framework github.com/status-im/status-go/mobile
 
 statusgo-mainnet:
 	build/env.sh go build -i -o $(GOBIN)/statusgo -v $(shell build/mainnet-flags.sh) ./cmd/statusd

@@ -56,7 +56,7 @@ type Logger struct {
 var logger = Logger{
 	Logger:  log.New("geth", "StatusIM"),
 	level:   log.LvlError,
-	handler: log.StreamHandler(os.Stdout, log.TerminalFormat(true)),
+	handler: log.StreamHandler(os.Stdout, log.TerminalFormat(false)),
 }
 
 func init() {
